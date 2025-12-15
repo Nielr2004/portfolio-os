@@ -7,6 +7,9 @@ import {
 } from 'lucide-react';
 
 const ProfileWidget = () => {
+  // Use the local path established earlier
+  const profileImageUrl = "/user_image.jpg"; 
+
   return (
     <div className="w-full h-full bg-[#191919] text-[#d4d4d4] relative flex flex-col font-sans selection:bg-[#2383e2]/30 selection:text-white overflow-hidden">
       
@@ -53,21 +56,16 @@ const ProfileWidget = () => {
         {/* PAGE BODY */}
         <div className="max-w-[900px] mx-auto px-6 md:px-24 pb-24 relative">
             
-            {/* TITLE & ICON AREA */}
-            {/* Added explicit top margin (pt-[50px]) to clear the absolute icon space */}
-            <div className="group relative mb-8 pt-[50px]">
+            {/* TITLE & ICON AREA - MODIFIED TO USE IMAGE */}
+            <div className="relative mb-8 pt-6"> 
+                {/* Profile Image, styled to look like a Notion icon */}
+                <img 
+                    src={profileImageUrl} // Use the local image path
+                    alt="Snehashis Roy Profile Picture"
+                    // FIXED: Corrected invalid size to w-16 h-16
+                    className="w-16 h-16 rounded-xl mb-4 object-cover border-4 border-[#191919] shadow-xl"
+                />
                 
-                {/* Icon (Absolute positioned relative to this container) */}
-                <div className="absolute -top-[90px] left-0 z-30 group-icon">
-                    <div className="text-[72px] leading-none hover:scale-110 transition-transform cursor-pointer select-none filter drop-shadow-lg">
-                    </div>
-                </div>
-                
-                {/* Icon Controls */}
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-4 left-0 flex gap-4 text-xs text-[#9b9b9b] select-none z-30">
-                    <button className="hover:text-[#d4d4d4] flex items-center gap-1"><span className="text-[10px]">☺</span> Change icon</button>
-                </div>
-
                 <h1 className="text-4xl font-bold text-white break-words mt-2">
                     Snehashis Roy
                 </h1>
@@ -89,7 +87,7 @@ const ProfileWidget = () => {
                     <PropertyRow label="Socials" icon={<LinkIcon size={16} />}>
                          <div className="flex flex-wrap gap-3">
                              <a href="https://github.com/Nielr2004" target="_blank" className="hover:bg-[#2c2c2c] px-1 -ml-1 rounded transition-colors text-[#d4d4d4] underline decoration-[#9b9b9b] underline-offset-4">GitHub</a>
-                             <a href="www.linkedin.com/in/snehashis-roy-40691725a" target="_blank" className="hover:bg-[#2c2c2c] px-1 rounded transition-colors text-[#d4d4d4] underline decoration-[#9b9b9b] underline-offset-4">LinkedIn</a>
+                             <a href="https://www.linkedin.com/in/snehashis-roy-40691725a" target="_blank" className="hover:bg-[#2c2c2c] px-1 rounded transition-colors text-[#d4d4d4] underline decoration-[#9b9b9b] underline-offset-4">LinkedIn</a>
                          </div>
                     </PropertyRow>
                 </div>
@@ -168,8 +166,7 @@ const Spacer = () => <div className="h-3" />;
 
 const NavBtn = ({ icon, label }: any) => (
     <button className={`
-        h-7 rounded hover:bg-[#2c2c2c] text-[#d4d4d4] transition-colors flex items-center justify-center
-        ${label ? 'px-2 text-xs font-medium' : 'w-7 text-[#9b9b9b]'}
+        h-7 rounded hover:{label || icon}
     `}>
         {label || icon}
     </button>
